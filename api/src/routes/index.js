@@ -5,6 +5,6 @@ const { Router } = require('express');
 const countries = require("./countries");
 const router = Router();
 
-router.use("/countries", countries)
+router.use("/api", countries)
 
 module.exports = router;

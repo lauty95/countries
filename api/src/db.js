@@ -41,35 +41,6 @@ const { Pais, Actividad } = sequelize.models;
 Pais.belongsToMany(Actividad, { through: 'country_activity' })
 Actividad.belongsToMany(Pais, { through: 'country_activity' })
 
-var Agergar = async () => {
-  await Pais.sync({ force: true });
-  const arg = await Pais.create({
-    id: "ARG",
-    nombre: "Argentina",
-    bandera: "urlBandera",
-    continente: "Sur America",
-    capital: "Bs As",
-    subregion: "No se",
-    area: "1000",
-    poblacion: "500"
-  });
-  await arg.save();
-
-  await Actividad.sync({ force: true });
-  const patinar = await Actividad.create({
-    id: 1,
-    nombre: "Patinar",
-    dificultad: 3,
-    duracion: 15,
-    temporada: 'Invierno'
-  });
-  await patinar.save();
-  console.log(patinar.toJSON());
-
-  console.log(arg.toJSON());
-};
-//Agergar();
-
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
