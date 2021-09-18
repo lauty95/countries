@@ -5,7 +5,7 @@ const router = express();
 
 var continentes = function (arr) {
     let continente = []
-    for (let i = 0; i < arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         let valor = arr[i].continente;
         if (continente.indexOf(valor) === -1) {
             continente.push(valor)
@@ -15,9 +15,23 @@ var continentes = function (arr) {
     return continente;
 }
 
-router.get("/countries", async (req, res) => {
-    const paises = await Pais.findAll()
-    res.json(paises);
+router.get("/countries/page/:page", async (req, res) => {
+    const { page } = req.params;
+    var paises = await Pais.findAll()
+    let res1 = []
+    let res2 = []
+    let j = 0;
+    for (let i = 1; i <= paises.length; i++){
+      if (j < 10){
+        res1.push(paises[i])
+      } else {
+        res2.push(res1)
+        j = 0;
+        res1 = [];
+      }
+      j++;
+    }
+    res.json(res2[parseInt(page)]);
 });
 
 router.get("/continents", async (req, res) => {
@@ -36,13 +50,15 @@ router.get("/countries/:idPais", async (req, res) => {
 
 router.get("/countries/name/:name", async (req, res) => {
     const { name } = req.params;
-    const condition = name ? 
-    {where: {
-        nombre: {
-            [Op.iLike]: `${name}%`
+    const condition = name ?
+        {
+            where: {
+                nombre: {
+                    [Op.iLike]: `${name}%`
+                }
+            }
         }
-    }}
-    : {}
+        : {}
     const results = await Pais.findAll(condition);
     res.json(results.length ? results : 'Country not found');
 })
