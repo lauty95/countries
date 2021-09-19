@@ -15,23 +15,9 @@ var continentes = function (arr) {
     return continente;
 }
 
-router.get("/countries/page/:page", async (req, res) => {
-    const { page } = req.params;
+router.get("/countries", async (req, res) => {
     var paises = await Pais.findAll()
-    let res1 = []
-    let res2 = []
-    let j = 0;
-    for (let i = 1; i <= paises.length; i++){
-      if (j < 10){
-        res1.push(paises[i])
-      } else {
-        res2.push(res1)
-        j = 0;
-        res1 = [];
-      }
-      j++;
-    }
-    res.json(res2[parseInt(page)]);
+    res.json(paises);
 });
 
 router.get("/continents", async (req, res) => {

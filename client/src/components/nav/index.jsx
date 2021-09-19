@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-//import { $CombinedState } from 'redux';
 import estilo from './nav.css'
 
 function validate (input) {

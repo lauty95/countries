@@ -9,7 +9,7 @@ export default function CountryDetails ({id}) {
       fetch(`http://localhost:3001/api/countries/${id}`)
         .then(res => res.json())
         .then(data => setCountry(data))
-    }, []); 
+    }, [id]); 
 
     function area (valor) {
         if (!valor) return 
