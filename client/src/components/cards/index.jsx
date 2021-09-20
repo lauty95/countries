@@ -5,14 +5,12 @@ import { Link } from "react-router-dom";
 export default function Cards({paises}) {
     return (
         paises.map( country =>
-            <Link key={country.id} to= {`/api/country/${country.id}`}>
+            <Link key={country.nombre} to= {`/api/country/${country.nombre}`}>
                 <Card 
                     nombre = {country.nombre}
                     continente = {country.continente}
                     bandera = {country.bandera}
-                    capital = {country.capital}
-                    poblacion = {country.poblacion}
-                    key= {country.id}
+                    key= {country.nombre}
                 />
             </Link>
         )

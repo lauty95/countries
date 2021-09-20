@@ -12,15 +12,24 @@ function Nav(props) {
         fetch('http://localhost:3001/api/continents')
             .then(res => res.json())
             .then(data => setContinents(data))
-    }, [props.country]);
+    }, []);
+
+    function capitalize (str){
+        const lower = str.toLowerCase()
+        return str.charAt(0).toUpperCase() + lower.slice(1)
+    }
 
     const handleChange = function (e) {
         props.reset()
-        props.filterBySearch(e.target.value)
+        props.filterBySearch(capitalize(e.target.value))
     }
 
     const filterChange = function (e) {
         props.filterByAlph(e.target.value)
+    }
+
+    const filterContinent = function (e) {
+        props.filterByContinent(e.target.value)
     }
 
     return (
@@ -31,7 +40,8 @@ function Nav(props) {
                 <option value="mayor">Mayor población</option>
                 <option value="menor">Menor población</option>
             </select>
-            <select name="Filtrar" className={estilo.orden}>
+            <select name="Filtrar" className={estilo.orden} onChange={filterContinent}>
+                <option value="">Todos</option>
                 {continents.map(c => <option key={c}>{c}</option>)}
             </select>
             <form>

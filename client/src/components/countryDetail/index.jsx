@@ -1,15 +1,13 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
-export default function CountryDetails ({id}) {
-
-    const [country, setCountry] = useState({});
-  
-    useEffect(() => {
-      fetch(`http://localhost:3001/api/countries/${id}`)
-        .then(res => res.json())
-        .then(data => setCountry(data))
-    }, [id]); 
+export default function CountryDetails ({nombre}) {
+  const [country, setCountry] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:3001/api/countries/name/${nombre}`)
+    .then(res => res.json())
+    .then(data => setCountry(data[0]))
+    }, [nombre]); 
 
     function area (valor) {
         if (!valor) return 

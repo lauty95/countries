@@ -16,7 +16,9 @@ var continentes = function (arr) {
 }
 
 router.get("/countries", async (req, res) => {
-    var paises = await Pais.findAll()
+    var paises = await Pais.findAll({
+        attributes: ['nombre', 'bandera', 'continente']
+    })
     res.json(paises);
 });
 

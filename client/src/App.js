@@ -10,9 +10,9 @@ function App() {
     <div className="App">
       <Route path="/api" component ={Nav} />
       <Route path="/api" component = {GeneralPages} exact />
-      <Route path="/api/country/:id" exact render= {({match}) => {
-        const pais = match.params.id;
-        return <CountryDetails id = {pais}/>
+      <Route path="/api/country/:nombre" exact render= {({match}) => {
+        const pais = match.params.nombre;
+        return <CountryDetails nombre = {pais}/>
       }} />
     </div>
   );

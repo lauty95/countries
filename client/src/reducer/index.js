@@ -60,8 +60,11 @@ function reducer(state = initialState, { type, payload }) {
                 country: state.countryFiltered 
             }
         case FILTER_BY_CONTINENT:
+            state.country = state.countryToShow
+            state.countryFiltered = state.country.filter(p => p.continente.includes(payload))
             return {
-                ...state
+                ...state,
+                country: state.countryFiltered
             }
         case FILTER_BY_ALPH:
             if(payload === 'az')
