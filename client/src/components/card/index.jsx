@@ -7,8 +7,6 @@ export default function Card (props) {
             <h1>{props.nombre}</h1>
             <h2>{props.continente}</h2>
             <img type="image/svg+xml" alt="bandera nacional" src={props.bandera} />
-            <p>Capital: {props.capital}</p>
-            <p>Población: {props.poblacion}</p>
         </div>
     )
 }
