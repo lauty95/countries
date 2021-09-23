@@ -7,13 +7,12 @@ import * as actionCreators from "../actions";
 import Cards from '../components/cards'
 
 
-const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, filterByAlph }) => {
+const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry }) => {
 
     useEffect(() => {
         fetchCountry();
     }, [])
     
-
     return (
         <>
             <Cards paises={country.slice(page, page + 10)} />

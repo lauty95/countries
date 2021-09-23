@@ -22,7 +22,7 @@ nav {
     color: rgb(219, 219, 219);
 }
 
-input:focus {
+.input:focus {
     outline: none !important;
     box-shadow: 0px 5px 2px 0px rgba(0,0,0,0.4);
     border: 0;
@@ -33,7 +33,7 @@ input:focus {
     color: white;
 }
 
-select {
+.orden {
     box-shadow: 0px 5px 2px 0px rgba(0,0,0,0.4);
     border: 0;
     background-color: #6C6C6C;
@@ -43,7 +43,7 @@ select {
     color: white;
 }
 
-select:focus {
+.orden:focus {
     outline: none !important;
     border: 0;
 }

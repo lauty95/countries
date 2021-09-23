@@ -7,13 +7,16 @@ const initialState = {
     country: [],
     countryToShow: [],
     countryFiltered: [],
-    loading: false
+    loading: false,
+    activities: []
 };
 
 function reducer(state = initialState, { type, payload }) {
     switch (type) {
         case ADD_ACTIVITY:
-            return [...state, { ...payload }];
+            return {
+                ...state,
+            }
         case FIND_COUNTRY:
             return {
                 ...state,
@@ -48,12 +51,7 @@ function reducer(state = initialState, { type, payload }) {
                 loading: true,
             }
         case FILTER_BY_SEARCH:
-            if (payload.length === 0) {
-                return {
-                    ...state,
-                    country: state.countryToShow
-                }
-            }
+            state.country = state.countryToShow
             state.countryFiltered = state.country.filter(p => p.nombre.includes(payload))
             return {
                 ...state,

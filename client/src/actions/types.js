@@ -1,5 +1,7 @@
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const POST_ACTIVITY = 'POST_ACTIVITY';
 export const FIND_COUNTRY = 'FIND_COUNTRY';
+export const FIND_ID = 'FIND_ID';
 export const PREV_PAGE = 'PREV_PAGE';
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const RESET = 'RESET';

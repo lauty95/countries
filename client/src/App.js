@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import Nav from './components/nav/';
 import GeneralPages from './render'
 import CountryDetails from './components/countryDetail';
+import FormActivity from './components/formActivity';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         const pais = match.params.nombre;
         return <CountryDetails nombre = {pais}/>
       }} />
+      <Route path="/activity" component={FormActivity} exact />
     </div>
   );
 }

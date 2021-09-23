@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import estilo from './nav.css'
+import estilo from './nav.module.css'
 import * as actionCreators from '../../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom'
 
 function Nav(props) {
 
@@ -31,7 +32,7 @@ function Nav(props) {
     const filterContinent = function (e) {
         props.filterByContinent(e.target.value)
     }
-
+    
     return (
         <nav className={estilo.nav}>
             <select name="Orden" className={estilo.orden} onChange={filterChange}>
@@ -46,6 +47,9 @@ function Nav(props) {
             </select>
             <form>
                 <input name="countrySearch" value={props.inputText} onChange={handleChange} placeholder="Buscador de  Paises" />
+            </form>
+            <form>
+                <Link to="/activity"><input type="submit" value="Nueva Actividad" /></Link>
             </form>
         </nav>
     )

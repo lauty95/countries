@@ -7,20 +7,22 @@ const activities = require("./activities")
 const router = express();
 const axios = require("axios").default;
 
-axios.get("https://restcountries.eu/rest/v2/all")
+axios.get("https://restcountries.com/v2/all")
     .then(async response => {
         await Pais.sync({ force: true })
         response.data.map(async pais => {
-            await Pais.create({
-                id: pais.alpha3Code,
-                nombre: pais.name,
-                bandera: pais.flag,
-                continente: pais.region,
-                capital: pais.capital,
-                subregion: pais.subregion,
-                area: pais.area,
-                poblacion: pais.population
-            })
+            if(pais.capital){
+                await Pais.create({
+                    id: pais.alpha3Code,
+                    nombre: pais.name,
+                    bandera: pais.flags[0],
+                    continente: pais.continent,
+                    capital: pais.capital,
+                    subregion: pais.region,
+                    area: pais.area,
+                    poblacion: pais.population
+                })
+            }
         })
     });
 
