@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import card from './card.module.css'
 
 export default function Card (props) {

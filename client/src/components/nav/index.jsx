@@ -8,14 +8,21 @@ import { Link } from 'react-router-dom'
 function Nav(props) {
 
     const [continents, setContinents] = React.useState([])
+    const [activities, setActivities] = React.useState([])
 
     useEffect(() => {
         fetch('http://localhost:3001/api/continents')
             .then(res => res.json())
             .then(data => setContinents(data))
+        fetch('http://localhost:3001/api/activity')
+            .then(res => res.json())
+            .then(data => setActivities(data))
+            
     }, []);
 
-    function capitalize (str){
+
+    console.log(activities)
+    function capitalize(str) {
         const lower = str.toLowerCase()
         return str.charAt(0).toUpperCase() + lower.slice(1)
     }
@@ -32,7 +39,16 @@ function Nav(props) {
     const filterContinent = function (e) {
         props.filterByContinent(e.target.value)
     }
-    
+
+    const filterActivity = function (e){
+        let res = []
+        let actividad = e.target.value
+        let filtrado = activities.filter(a => a.nombre === actividad)
+        filtrado.map ( f => res.push(f.pais) )
+        props.filterByActivity(res)
+    }
+
+
     return (
         <nav className={estilo.nav}>
             <select name="Orden" className={estilo.orden} onChange={filterChange}>
@@ -41,9 +57,13 @@ function Nav(props) {
                 <option value="mayor">Mayor población</option>
                 <option value="menor">Menor población</option>
             </select>
-            <select name="Filtrar" className={estilo.orden} onChange={filterContinent}>
-                <option value="">Todos</option>
+            <select name="FilterByContinent" className={estilo.orden} onChange={filterContinent}>
+                <option value="">Continentes</option>
                 {continents.map(c => <option key={c}>{c}</option>)}
+            </select>
+            <select name="FilterByActivity" className={estilo.orden} onChange={filterActivity}>
+                <option value="">Actividades</option>
+                {activities.map(a => <option key={a.id}>{a.nombre}</option>)}
             </select>
             <form>
                 <input name="countrySearch" value={props.inputText} onChange={handleChange} placeholder="Buscador de  Paises" />

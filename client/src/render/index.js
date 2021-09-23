@@ -11,7 +11,7 @@ const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry }) => {
 
     useEffect(() => {
         fetchCountry();
-    }, [])
+    }, [fetchCountry])
     
     return (
         <>

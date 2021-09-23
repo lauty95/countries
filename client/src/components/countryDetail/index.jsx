@@ -12,7 +12,7 @@ export default function CountryDetails({ nombre }) {
     fetch(`http://localhost:3001/api/mixin/?idCountry=${country.id}`)
       .then(data => data.json())
       .then(data => setActivity(data))
-  }, [country.id]);
+  }, [country.id, nombre]);
 
 
   function area(valor) {
@@ -49,7 +49,7 @@ export default function CountryDetails({ nombre }) {
       <p>Belongs to the subregion of <b>{country.subregion}</b> which has an <b>area of {area(country.area)}</b></p>
       <p>In our las register, this Country has a population of <b>{numerar(country.poblacion)} </b></p>
       <hr></hr>
-      {activity.length > 0 ? activity.map((act) => <Actividad props = {act}/>) : <h2>No hay actividades</h2>}
+      {activity.length > 0 ? activity.map((act) => <Actividad key={act.id} props = {act}/>) : <h2>No hay actividades</h2>}
     </>
   )
 

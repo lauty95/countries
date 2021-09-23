@@ -1,4 +1,4 @@
-import { ADD_ACTIVITY, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT } from "../actions/types";
+import { FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from "../actions/types";
 
 const initialState = {
     inputText: "",
@@ -8,15 +8,10 @@ const initialState = {
     countryToShow: [],
     countryFiltered: [],
     loading: false,
-    activities: []
 };
 
 function reducer(state = initialState, { type, payload }) {
     switch (type) {
-        case ADD_ACTIVITY:
-            return {
-                ...state,
-            }
         case FIND_COUNTRY:
             return {
                 ...state,
@@ -55,7 +50,7 @@ function reducer(state = initialState, { type, payload }) {
             state.countryFiltered = state.country.filter(p => p.nombre.includes(payload))
             return {
                 ...state,
-                country: state.countryFiltered 
+                country: state.countryFiltered
             }
         case FILTER_BY_CONTINENT:
             state.country = state.countryToShow
@@ -64,27 +59,34 @@ function reducer(state = initialState, { type, payload }) {
                 ...state,
                 country: state.countryFiltered
             }
+        case FILTER_BY_ACTIVITY:
+            state.country = state.countryToShow
+            state.countryFiltered = state.country.filter(p => p.nombre.includes(payload))
+            return {
+                ...state,
+                country: state.countryFiltered
+            }
         case FILTER_BY_ALPH:
-            if(payload === 'az')
-                state.country.sort ((a,b) => {
+            if (payload === 'az')
+                state.country.sort((a, b) => {
                     if (a.nombre < b.nombre) return -1;
                     if (a.nombre > b.nombre) return 1;
                     return 0;
                 })
-            if(payload === 'za')
-                state.country.sort ((a,b) => {
+            if (payload === 'za')
+                state.country.sort((a, b) => {
                     if (a.nombre > b.nombre) return -1;
                     if (a.nombre < b.nombre) return 1;
                     return 0;
                 })
-            if(payload === 'menor')
-                state.country.sort ((a,b) => {
+            if (payload === 'menor')
+                state.country.sort((a, b) => {
                     if (a.poblacion < b.poblacion) return -1;
                     if (a.poblacion > b.poblacion) return 1;
                     return 0;
                 })
-            if(payload === 'mayor')
-                state.country.sort ((a,b) => {
+            if (payload === 'mayor')
+                state.country.sort((a, b) => {
                     if (a.poblacion > b.poblacion) return -1;
                     if (a.poblacion < b.poblacion) return 1;
                     return 0;

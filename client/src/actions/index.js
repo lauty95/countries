@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_ACTIVITY, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET } from "./types";
+import { FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_ACTIVITY } from "./types";
 
 export function postActivity(data) {
     return function (dispatch) {
@@ -7,23 +7,10 @@ export function postActivity(data) {
         fetch(`http://localhost:3001/api/countries/name/${data.pais}`)
             .then(r => r.json())
             .then(r => data["idPais"] = r[0].id)
-            .then(() => axios.post('http://localhost:3001/api/activity/', data)
-            .then(r => console.log(r)))
+            .then(() => axios.post('http://localhost:3001/api/activity/', data))
     }
 };
 
-export function addActivity({ nombre, dificultad, duracion, temporada, pais }) {
-    return {
-        type: ADD_ACTIVITY,
-        payload: {
-            nombre,
-            dificultad,
-            duracion,
-            temporada,
-            pais
-        }
-    }
-}
 export function getPost() {
     return {
         type: GET_POST,
@@ -72,6 +59,13 @@ export function reset() {
 export function filterByContinent(data) {
     return {
         type: FILTER_BY_CONTINENT,
+        payload: data
+    }
+}
+
+export function filterByActivity(data){
+    return {
+        type: FILTER_BY_ACTIVITY,
         payload: data
     }
 }
