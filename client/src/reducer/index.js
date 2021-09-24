@@ -60,8 +60,15 @@ function reducer(state = initialState, { type, payload }) {
                 country: state.countryFiltered
             }
         case FILTER_BY_ACTIVITY:
-            state.country = state.countryToShow
-            state.countryFiltered = state.country.filter(p => p.nombre.includes(payload))
+            if (payload.length > 0){
+                state.country = state.countryToShow
+                state.countryFiltered = []
+                payload.forEach(element => {
+                    state.countryFiltered.push((state.country.filter(p => p.nombre.includes(element)))[0])
+                });
+            } else {
+                state.countryFiltered = state.countryToShow
+            }
             return {
                 ...state,
                 country: state.countryFiltered
