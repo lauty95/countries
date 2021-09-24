@@ -47,12 +47,20 @@ function Nav(props) {
         props.filterByActivity(res)
     }
 
+    const OrderByPopulation = function (e){
+        props.orderByPopulation(e.target.value);
+    }
+
 
     return (
         <nav className={estilo.nav}>
-            <select name="Orden" className={estilo.orden} onChange={filterChange}>
+            <select name="OrderByAlph" className={estilo.orden} onChange={filterChange}>
+                <option value="">Ordenar Alfabéticamente</option>
                 <option value="az">Alfabético A-Z</option>
                 <option value="za">Alfabético Z-A</option>
+            </select>
+            <select name="OrderByPopulation" className={estilo.orden} onChange={OrderByPopulation}>
+                <option value="">Ordenar por Poblacion</option>
                 <option value="mayor">Mayor población</option>
                 <option value="menor">Menor población</option>
             </select>

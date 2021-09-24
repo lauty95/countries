@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "../actions";
-//import { Link, Route } from 'react-router-dom'
 
 import Cards from '../components/cards'
 

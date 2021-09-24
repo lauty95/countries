@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_ACTIVITY } from "./types";
+import { FILTER_BY_POPULATION, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_ACTIVITY } from "./types";
 
 export function postActivity(data) {
     return function (dispatch) {
@@ -30,6 +30,28 @@ export function fetchCountry() {
             .then(data => dispatch(findCountry(data)))
     }
 };
+
+export function orderByPopulation(orden) {
+    return function (dispatch) {
+        dispatch(getPost());
+        fetch(`http://localhost:3001/api/countriesOrderByPopulation`)
+            .then(res => res.json())
+            .then(data => {
+                if(orden === 'mayor'){
+                    dispatch(orderCountry(data.reverse()))
+                } else {
+                    dispatch(orderCountry(data))
+                }
+            })
+    }
+}
+
+function orderCountry(data) {
+    return {
+        type: FILTER_BY_POPULATION,
+        payload: data
+    }
+}
 
 export function filterBySearch(data) {
     return {
@@ -63,7 +85,7 @@ export function filterByContinent(data) {
     }
 }
 
-export function filterByActivity(data){
+export function filterByActivity(data) {
     return {
         type: FILTER_BY_ACTIVITY,
         payload: data

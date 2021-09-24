@@ -1,4 +1,4 @@
-import { FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from "../actions/types";
+import { FILTER_BY_POPULATION, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from "../actions/types";
 
 const initialState = {
     inputText: "",
@@ -60,7 +60,7 @@ function reducer(state = initialState, { type, payload }) {
                 country: state.countryFiltered
             }
         case FILTER_BY_ACTIVITY:
-            if (payload.length > 0){
+            if (payload.length > 0) {
                 state.country = state.countryToShow
                 state.countryFiltered = []
                 payload.forEach(element => {
@@ -86,21 +86,14 @@ function reducer(state = initialState, { type, payload }) {
                     if (a.nombre < b.nombre) return 1;
                     return 0;
                 })
-            if (payload === 'menor')
-                state.country.sort((a, b) => {
-                    if (a.poblacion < b.poblacion) return -1;
-                    if (a.poblacion > b.poblacion) return 1;
-                    return 0;
-                })
-            if (payload === 'mayor')
-                state.country.sort((a, b) => {
-                    if (a.poblacion > b.poblacion) return -1;
-                    if (a.poblacion < b.poblacion) return 1;
-                    return 0;
-                })
             return {
                 ...state,
                 order: payload,
+            }
+        case FILTER_BY_POPULATION:
+            return {
+                ...state,
+                country: payload,
             }
         default:
             return state;

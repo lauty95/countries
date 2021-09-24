@@ -22,6 +22,14 @@ router.get("/countries", async (req, res) => {
     res.json(paises);
 });
 
+router.get("/countriesOrderByPopulation", async (req, res) => {
+    var paises = await Pais.findAll({
+        attributes: ['nombre', 'bandera', 'continente'],
+        order:['poblacion']
+    })
+    res.json(paises);
+});
+
 router.get("/continents", async (req, res) => {
     const paises = await Pais.findAll({
         attributes: ['continente']
