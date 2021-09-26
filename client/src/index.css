@@ -5,9 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./img/background.jpg");
+  background-attachment: fixed;
+  animation: slider 450s infinite linear;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@keyframes slider {
+  to {
+    background-position: 2048px 0;
+  }
 }

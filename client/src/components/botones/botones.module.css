@@ -1,24 +1,25 @@
-.num {
-    background-color: #6C6C6C;
-    box-shadow: 0px 5px 1px 1px rgba(0,0,0,0.4);
-    color: white;
+.boton {
+    background-color: #060E4B;
+    box-shadow: 0px 0px 6px 0px #ECF1C8;
+    color: #ECF1C8;
     border: 0;
-    height: 20px;
-    width: 30px;
+    border-radius: 2px;
+    width: 100px;
+    height: 40px;
     transition-duration: 300ms;
-    margin-left: 5px;
-    margin-right: 5px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.num:hover {
-    background-color: white;
-    box-shadow: 0px 5px 1px 1px rgba(0,0,0,0.2);
-    color: #6C6C6C;
+.boton:hover {
+    background-color: #ECF1C8;
+    box-shadow: 0px 0px 6px 0px #ECF1C8;
+    border-radius: 2px;
+    color: #060E4B;
     border: 0;
-    height: 20px;
-    width: 30px;
+    width: 100px;
     cursor: pointer;
     transition-duration: 300ms;
-    margin-left: 5px;
-    margin-right: 5px;
 }
