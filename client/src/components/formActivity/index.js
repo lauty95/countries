@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as actionCreators from '../../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import s from './form.module.css'
 import Botones from './../botones'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
 
 function FormActivity({ postActivity, country }) {
-    const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: "" });
+    const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] });
     const [error, setError] = React.useState({});
+    const [options, setOptions] = React.useState([]);
+    const [paisesSeleccionados, setPaisesSeleccionados] = React.useState([]);
+
+    useEffect(() => {
+        let opciones = [];
+        country.forEach(el => {
+            opciones.push({ value: el.nombre, label: el.nombre })
+        })
+        setOptions(opciones);
+    }, [country])
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (!formData.pais === "") {
-            let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: formData.pais }
-            postActivity(data)
-            alert(`La actividad ${formData.name} ahora puede verse en el pais ${formData.pais}`)
-            setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: "" })
-
+        if (paisesSeleccionados.length > 0) {
+            paisesSeleccionados.forEach( c => {
+                let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: c.value }
+                postActivity(data)
+            })
+            setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] })
+            setPaisesSeleccionados([])
         } else {
             alert("Debe seleccionar al menos un pais")
         }
@@ -28,7 +40,6 @@ function FormActivity({ postActivity, country }) {
             const state = { ...prevData, [e.target.name]: e.target.value }
             const validations = validate(state);
             setError(validations);
-
             return state;
         })
     }
@@ -63,11 +74,9 @@ function FormActivity({ postActivity, country }) {
                 <Link to="/api"> <Botones prop="Volver" /> </Link>
             </form>
 
-            <form className={s.formulario} >
+            <form className={s.formulario}>
                 <h2>Seleccione el/los paises</h2>
-                <select multiple className={s.lista}>
-                    {country.map(pais => <option key={pais.id} value={pais.nombre}>{pais.nombre}</option>)}
-                </select>
+                <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} />
             </form>
         </>
     )
