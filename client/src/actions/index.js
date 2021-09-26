@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER_BY_POPULATION, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_ACTIVITY } from "./types";
+import { FILTER_BY_POPULATION, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SEARCH, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_ACTIVITY, LAST } from "./types";
 
 export function postActivity(data) {
     return function (dispatch) {
@@ -96,5 +96,11 @@ export function filterByAlph(data) {
     return {
         type: FILTER_BY_ALPH,
         payload: data
+    }
+}
+
+export function last () {
+    return {
+        type: LAST
     }
 }

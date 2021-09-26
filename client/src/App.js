@@ -1,7 +1,7 @@
 import './App.css';
 import { Route } from 'react-router-dom'
 import Nav from './components/nav/';
-import GeneralPages from './render'
+import GeneralPages from './components/render'
 import CountryDetails from './components/countryDetail';
 import FormActivity from './components/formActivity';
 import Inicio from './components/inicio';

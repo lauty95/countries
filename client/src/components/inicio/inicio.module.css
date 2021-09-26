@@ -1,5 +1,5 @@
 .botonInicio{
-    margin-bottom: 20%;
+    margin-bottom: 28%;
     position: absolute;
     display: inline-block;
     bottom: 0px;
@@ -7,10 +7,10 @@
 }
 @keyframes showButton {
     from {
-        margin-bottom: 40%;
+        margin-bottom: 60%;
         filter: opacity(0)
     } to {
-        margin-bottom: 20%;
+        margin-bottom: 28%;
         filter:opacity(1);
     }
 }

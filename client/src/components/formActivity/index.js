@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import s from './form.module.css'
 import Botones from './../botones'
 import { Link } from 'react-router-dom'
-import Select from 'react-select'
+// import Select from 'react-select'
 
 function FormActivity({ postActivity, country }) {
     const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] });
@@ -23,11 +23,14 @@ function FormActivity({ postActivity, country }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (paisesSeleccionados.length > 0) {
-            paisesSeleccionados.forEach( c => {
-                let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: c.value }
-                postActivity(data)
-            })
+        let lista = paisesSeleccionados.target;
+        if (lista.length > 0) {
+            for(let i = 0; i < lista.length; i++){
+                if(lista[i].selected){
+                    let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: lista[i].value }
+                    postActivity(data)
+                }
+            }
             setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] })
             setPaisesSeleccionados([])
         } else {
@@ -76,7 +79,10 @@ function FormActivity({ postActivity, country }) {
 
             <form className={s.formulario}>
                 <h2>Seleccione el/los paises</h2>
-                <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} />
+                <select multiple className={s.lista} onChange={setPaisesSeleccionados}>
+                    {options.map( op => <option key={op.value} value={op.label}>{op.label}</option>)}
+                </select>
+                {/* <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} /> */}
             </form>
         </>
     )
@@ -85,7 +91,7 @@ function FormActivity({ postActivity, country }) {
 function validate(data) {
     const error = {}
     if (!data.name) error.name = "Debe ingresar el nombre de la actividad"
-    if (!data.duracion) error.duracion = "Debe ingresar la duracion"
+    if (!data.duracion || data.duracion === 0) error.duracion = "Debe ingresar la duracion"
     return error;
 }
 

@@ -1,4 +1,4 @@
-import { FILTER_BY_POPULATION, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from "../actions/types";
+import { FILTER_BY_POPULATION, FIND_COUNTRY, GET_POST, NEXT_PAGE, PREV_PAGE, RESET, FILTER_BY_SEARCH, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, LAST } from "../actions/types";
 
 const initialState = {
     inputText: "",
@@ -23,6 +23,11 @@ function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 page: 0
+            }
+        case LAST:
+            return {
+                ...state,
+                page: Math.floor(state.country.length / 10) * 10
             }
         case NEXT_PAGE:
             return {
@@ -59,7 +64,7 @@ function reducer(state = initialState, { type, payload }) {
                 ...state,
                 country: state.countryFiltered
             }
-        case FILTER_BY_ACTIVITY:
+            case FILTER_BY_ACTIVITY:
             if (payload.length > 0) {
                 state.country = state.countryToShow
                 state.countryFiltered = []

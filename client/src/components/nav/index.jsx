@@ -38,10 +38,12 @@ function Nav(props) {
     }
 
     const filterContinent = function (e) {
+        props.reset()
         props.filterByContinent(e.target.value)
     }
 
     const filterActivity = function (e) {
+        props.reset()
         let res = []
         let actividad = e.target.value
         let filtrado = activities.filter(a => a.nombre === actividad)
@@ -50,7 +52,23 @@ function Nav(props) {
     }
 
     const OrderByPopulation = function (e) {
+        props.reset()
         props.orderByPopulation(e.target.value);
+    }
+
+    const renderizarActividades = function(){
+        var newArray = [];
+        var lookupObject  = {};
+
+        for(var i in activities) {
+            lookupObject[activities[i].nombre] = activities[i];
+        }
+
+        for(i in lookupObject) {
+            newArray.push(lookupObject[i]);
+        }
+
+        return(newArray.map(el => <option key={el.id*10}>{el.nombre}</option>))
     }
 
 
@@ -75,7 +93,7 @@ function Nav(props) {
                 </select></li>
                 <li><select name="FilterByActivity" className={estilo.orden} onChange={filterActivity}>
                     <option value="">Actividades</option>
-                    {activities.map(a => <option key={a.id}>{a.nombre}</option>)}
+                    {renderizarActividades()}
                 </select></li>
                 <li>
                     <input name="countrySearch" value={props.inputText} onChange={handleChange} placeholder="Buscador de  Paises" />
