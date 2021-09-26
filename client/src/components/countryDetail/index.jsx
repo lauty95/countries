@@ -49,6 +49,7 @@ export default function CountryDetails({ nombre }) {
       <div className={s.volver}><Link to="/api"> <Botones prop="Volver" /></Link></div>
       <h1>{country.nombre}</h1>
       <img className={s.bandera} type="image/svg+xml" alt="bandera nacional" src={country.bandera} />
+      <h3>Código del pais: {country.id}</h3>
       <p>Pertenece al continente de <b>{country.continente}</b>, y su capital se llama <b>{country.capital}</b>.</p>
       <p>Pertenece a la subregión de <b>{country.subregion}</b>, y posee un área de <b>area of {area(country.area)}</b></p>
       <p>Según nuestros registros, este pais posee una población de <b>{numerar(country.poblacion)}</b> personas.</p>

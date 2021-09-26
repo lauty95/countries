@@ -6,16 +6,21 @@ import s from './form.module.css'
 import Botones from './../botones'
 import { Link } from 'react-router-dom'
 
-function FormActivity({ postActivity }) {
+function FormActivity({ postActivity, country }) {
     const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: "" });
     const [error, setError] = React.useState({});
 
     function handleSubmit(e) {
         e.preventDefault();
-        let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: formData.pais }
-        postActivity(data)
-        alert(`La actividad ${formData.name} ahora puede verse en el pais ${formData.pais}`)
-        setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: "" })
+        if (!formData.pais === "") {
+            let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: formData.pais }
+            postActivity(data)
+            alert(`La actividad ${formData.name} ahora puede verse en el pais ${formData.pais}`)
+            setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: "" })
+
+        } else {
+            alert("Debe seleccionar al menos un pais")
+        }
     }
 
     function handleChange(e) {
@@ -29,41 +34,41 @@ function FormActivity({ postActivity }) {
     }
 
     return (
-        <form className={s.formulario} onSubmit={handleSubmit}>
-            <FormItem label="Nombre de la Actividad" name="name" value={formData.name} handleChange={handleChange} error={error.name} clase={s.inputs} />
-            <div className={s.inputs}>
-                <label>Duración</label>
-                <input className={s.inputDuracion} type="number" name={"duracion"} value={formData.duracion} onChange={handleChange} />
-            </div>
-            <span>{error.duracion}</span>
-            <div className={s.inputs}>
-                <label>Dificultad</label>
-                <input type="range" name="dificultad" min="1" max="5" step="1" value={formData.dificultad} onChange={handleChange} />
-            </div>
-            <div className={s.inputs}>
-                <label>Temporada</label>
-                <select className={s.input} name="temporada" onChange={handleChange}>
-                    <option>Verano</option>
-                    <option>Otoño</option>
-                    <option>Invierno</option>
-                    <option>Primavera</option>
-                </select>
-            </div>
-            <FormItem label="Pais/es" name="pais" value={formData.pais} handleChange={handleChange} error={error.pais} clase={s.inputs} />
-            <input className={s.boton} type="submit" value="Guardar" />
-            <Link to="/api"> <Botones prop="Volver" /> </Link>
-        </form>
-    )
-}
-
-function FormItem({ label, name, value, handleChange, error, clase }) {
-    return (
         <>
-            <div className={clase}>
-                <label>{label}</label>
-                <input name={name} value={value} onChange={handleChange} />
-            </div>
-            <span>{error}</span>
+            <form className={s.formulario} onSubmit={handleSubmit}>
+                <div className={s.inputs}>
+                    <label>Nombre de la Actividad</label>
+                    <input name={"name"} value={formData.name} onChange={handleChange} />
+                </div>
+                <span>{error.name}</span>
+                <div className={s.inputs}>
+                    <label>Duración</label>
+                    <input className={s.inputDuracion} type="number" name={"duracion"} value={formData.duracion} onChange={handleChange} />
+                </div>
+                <span>{error.duracion}</span>
+                <div className={s.inputs}>
+                    <label>Dificultad</label>
+                    <input type="range" name="dificultad" min="1" max="5" step="1" value={formData.dificultad} onChange={handleChange} />
+                </div>
+                <div className={s.inputs}>
+                    <label>Temporada</label>
+                    <select className={s.input} name="temporada" onChange={handleChange}>
+                        <option>Verano</option>
+                        <option>Otoño</option>
+                        <option>Invierno</option>
+                        <option>Primavera</option>
+                    </select>
+                </div>
+                <input className={s.boton} type="submit" value="Guardar" />
+                <Link to="/api"> <Botones prop="Volver" /> </Link>
+            </form>
+
+            <form className={s.formulario} >
+                <h2>Seleccione el/los paises</h2>
+                <select multiple className={s.lista}>
+                    {country.map(pais => <option key={pais.id} value={pais.nombre}>{pais.nombre}</option>)}
+                </select>
+            </form>
         </>
     )
 }
@@ -77,7 +82,7 @@ function validate(data) {
 
 function mapStateToProps(state) {
     return {
-        country_id: state.country_id
+        country: state.country
     }
 }
 

@@ -46,3 +46,16 @@ span {
 .inputDuracion{
     width: 50px;
 }
+
+.formulario p{
+    display: inline-block;
+}
+.formulario h2{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.lista {
+    height: 350px;
+}
