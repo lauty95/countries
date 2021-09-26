@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
 import s from './nav.module.css'
 import Botones from './../botones'
-
 function Nav(props) {
 
     const [continents, setContinents] = React.useState([])
@@ -56,19 +55,19 @@ function Nav(props) {
         props.orderByPopulation(e.target.value);
     }
 
-    const renderizarActividades = function(){
+    const renderizarActividades = function () {
         var newArray = [];
-        var lookupObject  = {};
+        var lookupObject = {};
 
-        for(var i in activities) {
+        for (var i in activities) {
             lookupObject[activities[i].nombre] = activities[i];
         }
 
-        for(i in lookupObject) {
+        for (i in lookupObject) {
             newArray.push(lookupObject[i]);
         }
 
-        return(newArray.map(el => <option key={el.id*10}>{el.nombre}</option>))
+        return (newArray.map(el => <option key={el.id * 10}>{el.nombre}</option>))
     }
 
 

@@ -33,6 +33,7 @@ function FormActivity({ postActivity, country }) {
             }
             setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] })
             setPaisesSeleccionados([])
+            alert('Actividades guardadas exitosamente')
         } else {
             alert("Debe seleccionar al menos un pais")
         }
@@ -56,7 +57,7 @@ function FormActivity({ postActivity, country }) {
                 </div>
                 <span>{error.name}</span>
                 <div className={s.inputs}>
-                    <label>Duración</label>
+                    <label>Duración (minutos)</label>
                     <input className={s.inputDuracion} type="number" name={"duracion"} value={formData.duracion} onChange={handleChange} />
                 </div>
                 <span>{error.duracion}</span>

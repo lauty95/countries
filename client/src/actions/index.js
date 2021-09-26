@@ -37,7 +37,7 @@ export function orderByPopulation(orden) {
         fetch(`http://localhost:3001/api/countriesOrderByPopulation`)
             .then(res => res.json())
             .then(data => {
-                if(orden === 'mayor'){
+                if (orden === 'mayor') {
                     dispatch(orderCountry(data.reverse()))
                 } else {
                     dispatch(orderCountry(data))
@@ -99,7 +99,7 @@ export function filterByAlph(data) {
     }
 }
 
-export function last () {
+export function last() {
     return {
         type: LAST
     }

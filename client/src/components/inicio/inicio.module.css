@@ -14,3 +14,22 @@
         filter:opacity(1);
     }
 }
+
+@media screen and (max-width: 768px) {
+    .botonInicio{
+        display: block;
+        margin-left: 35%;
+        margin-bottom: 60%;
+        bottom: 0px;
+        animation: showButton 5s;
+    }
+    @keyframes showButton {
+        from {
+            margin-bottom: 40%;
+            filter: opacity(0)
+        } to {
+            margin-bottom: 60%;
+            filter:opacity(1);
+        }
+    }
+}
