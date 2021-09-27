@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import s from './form.module.css'
 import Botones from './../botones'
 import { Link } from 'react-router-dom'
-// import Select from 'react-select'
+import Select from 'react-select'
 
 function FormActivity({ postActivity, country }) {
     const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] });
@@ -23,13 +23,13 @@ function FormActivity({ postActivity, country }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        let lista = paisesSeleccionados.target;
+        let lista = paisesSeleccionados;
         if (lista.length > 0) {
             for(let i = 0; i < lista.length; i++){
-                if(lista[i].selected){
+                // if(lista[i].selected){
                     let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: lista[i].value }
                     postActivity(data)
-                }
+                // }
             }
             setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] })
             setPaisesSeleccionados([])
@@ -37,6 +37,7 @@ function FormActivity({ postActivity, country }) {
         } else {
             alert("Debe seleccionar al menos un pais")
         }
+        console.log(paisesSeleccionados)
     }
 
     function handleChange(e) {
@@ -80,10 +81,10 @@ function FormActivity({ postActivity, country }) {
 
             <form className={s.formulario}>
                 <h2>Seleccione el/los paises</h2>
-                <select multiple className={s.lista} onChange={setPaisesSeleccionados}>
+                {/* <select multiple className={s.lista} onChange={setPaisesSeleccionados}>
                     {options.map( op => <option key={op.value} value={op.label}>{op.label}</option>)}
-                </select>
-                {/* <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} /> */}
+                </select> */}
+                <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} />
             </form>
         </>
     )

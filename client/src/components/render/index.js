@@ -9,6 +9,8 @@ import Botones from "../botones";
 
 const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last }) => {
 
+    var xIni;
+
     useEffect(() => {
         fetchCountry();
     }, [fetchCountry])
@@ -20,8 +22,21 @@ const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last
         return
     }
 
+    function inicioToque (e) {
+        xIni = e.targetTouches[0].pageX
+    }
+
+    function cambiarPagina(e) {
+        if(e.targetTouches[0].pageX + 5 > xIni){
+            prevPage();
+        }
+        if(e.targetTouches[0].pageX - 5 < xIni){
+            nextPage();
+        }
+    }
+
     return (
-        <div className={s.container}>
+        <div className={s.container} onTouchStart={inicioToque} onTouchMove={cambiarPagina}>
             <Botones prop="Primera" action={reset} />
             <Botones prop="Anterior" action={prevPage} />
             <Botones prop="Siguiente" action={paginaSiguiente} />
