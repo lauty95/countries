@@ -1,6 +1,6 @@
 .tarjeta {
     box-shadow: rgba(87, 86, 86, 0.8) 0px 18px 50px -10px;
-    height: 350px;
+    height: 320px;
     width: 300px;
     transition-duration: 300ms;
     margin: 20px;
@@ -9,8 +9,6 @@
 
 .tarjeta:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    height: 350px;
-    width: 300px;
     transition-duration: 300ms;
     cursor: pointer;
 }

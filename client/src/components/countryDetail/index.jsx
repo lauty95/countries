@@ -8,11 +8,11 @@ export default function CountryDetails({ nombre }) {
   const [country, setCountry] = useState({});
   const [activity, setActivity] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3001/api/countries/name/${nombre}`)
+    fetch(`http://192.168.0.150:3001/api/countries/name/${nombre}`)
       .then(res => res.json())
       .then(data => setCountry(data[0]))
 
-    fetch(`http://localhost:3001/api/mixin/?idCountry=${country.id}`)
+    fetch(`http://192.168.0.150:3001/api/mixin/?idCountry=${country.id}`)
       .then(data => data.json())
       .then(data => setActivity(data))
   }, [country.id, nombre]);

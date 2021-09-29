@@ -1,7 +1,8 @@
-const { Pais } = require('../db');
+const { Pais, Actividad } = require('../db');
 const express = require('express');
 const { Op } = require('sequelize');
 const router = express();
+
 
 var continentes = function (arr) {
     let continente = []
@@ -17,18 +18,18 @@ var continentes = function (arr) {
 
 router.get("/countries", async (req, res) => {
     var paises = await Pais.findAll({
-        attributes: ['nombre', 'bandera', 'continente']
+        attributes: ['nombre', 'bandera', 'continente', 'poblacion']
     })
     res.json(paises);
 });
 
-router.get("/countriesOrderByPopulation", async (req, res) => {
-    var paises = await Pais.findAll({
-        attributes: ['nombre', 'bandera', 'continente'],
-        order:['poblacion']
-    })
-    res.json(paises);
-});
+// router.get("/countriesOrderByPopulation", async (req, res) => {
+//     var paises = await Pais.findAll({
+//         attributes: ['nombre', 'bandera', 'continente'],
+//         order:['poblacion']
+//     })
+//     res.json(paises);
+// });
 
 router.get("/continents", async (req, res) => {
     const paises = await Pais.findAll({
@@ -41,6 +42,12 @@ router.get("/continents", async (req, res) => {
 router.get("/countries/:idPais", async (req, res) => {
     const { idPais } = req.params;
     const pais = await Pais.findByPk(idPais);
+    const actividad = await Actividad.findAll({
+        where: {
+            idPais: idPais
+        }
+    })
+    if (actividad) console.log(actividad);
     res.json(pais || 'Country not found')
 });
 

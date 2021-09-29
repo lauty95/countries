@@ -12,10 +12,10 @@ function Nav(props) {
     const [activities, setActivities] = React.useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/continents')
+        fetch('http://192.168.0.150:3001/api/continents')
             .then(res => res.json())
             .then(data => setContinents(data))
-        fetch('http://localhost:3001/api/activity')
+        fetch('http://192.168.0.150:3001/api/activity')
             .then(res => res.json())
             .then(data => setActivities(data))
 
@@ -33,6 +33,7 @@ function Nav(props) {
     }
 
     const filterChange = function (e) {
+        props.reset()
         props.filterByAlph(e.target.value)
     }
 
@@ -52,7 +53,7 @@ function Nav(props) {
 
     const OrderByPopulation = function (e) {
         props.reset()
-        props.orderByPopulation(e.target.value);
+        props.orderCountry(e.target.value);
     }
 
     const renderizarActividades = function () {
@@ -95,7 +96,7 @@ function Nav(props) {
                     {renderizarActividades()}
                 </select></li>
                 <li>
-                    <input name="countrySearch" value={props.inputText} onChange={handleChange} placeholder="Buscador de  Paises" />
+                    <input className={estilo.buscador} name="countrySearch" value={props.inputText} onChange={handleChange} placeholder="Buscar por Nombre" />
                 </li>
                 <li>
                     <Link to="/activity"><Botones prop="+ Actividad" /></Link>

@@ -6,3 +6,15 @@
     border-radius: 15px;
     padding-top: 15px;
 }
+
+.botonesDireccion {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width: 768px) {
+    .botonesDireccion {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

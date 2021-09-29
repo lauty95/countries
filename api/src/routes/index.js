@@ -5,17 +5,17 @@ const activities = require("./activities")
 const router = express();
 const axios = require("axios").default;
 
-axios.get("https://restcountries.com/v3/all")
+axios.get("https://restcountries.com/v2/all")
     .then(async response => {
         await Pais.sync({ force: true })
         response.data.map(async pais => {
             if(pais.flags && pais.capital){
                 await Pais.create({
-                    id: pais.cca3,
-                    nombre: pais.name.common,
-                    bandera: pais.flags[0],
+                    id: pais.alpha3Code,
+                    nombre: pais.name,
+                    bandera: pais.flags.svg,
                     continente: pais.region,
-                    capital: pais.capital[0],
+                    capital: pais.capital,
                     subregion: pais.region,
                     area: pais.area,
                     poblacion: pais.population

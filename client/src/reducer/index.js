@@ -64,7 +64,7 @@ function reducer(state = initialState, { type, payload }) {
                 ...state,
                 country: state.countryFiltered
             }
-            case FILTER_BY_ACTIVITY:
+        case FILTER_BY_ACTIVITY:
             if (payload.length > 0) {
                 state.country = state.countryToShow
                 state.countryFiltered = []
@@ -96,9 +96,21 @@ function reducer(state = initialState, { type, payload }) {
                 order: payload,
             }
         case FILTER_BY_POPULATION:
+            if (payload === 'mayor')
+                state.country.sort((a, b) => {
+                    if (a.poblacion > b.poblacion) return -1;
+                    if (a.poblacion < b.poblacion) return 1;
+                    return 0;
+                })
+            if (payload === 'menor')
+                state.country.sort((a, b) => {
+                    if (a.poblacion < b.poblacion) return -1;
+                    if (a.poblacion > b.poblacion) return 1;
+                    return 0;
+                })
             return {
                 ...state,
-                country: payload,
+                order: payload
             }
         default:
             return state;

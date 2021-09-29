@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 function FormActivity({ postActivity, country }) {
     const [formData, setFormData] = React.useState({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] });
-    const [error, setError] = React.useState({});
+    const [error, setError] = React.useState({name: "", duracion: ""});
     const [options, setOptions] = React.useState([]);
     const [paisesSeleccionados, setPaisesSeleccionados] = React.useState([]);
 
@@ -23,21 +23,22 @@ function FormActivity({ postActivity, country }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        // let lista = paisesSeleccionados.target;
         let lista = paisesSeleccionados;
-        if (lista.length > 0) {
+        if (!lista) return alert("Seleccione al menos un pais")
+        if (lista.length > 0 && error.name === "" && error.duracion === "") {
             for(let i = 0; i < lista.length; i++){
-                // if(lista[i].selected){
+                //  if(lista[i].selected){
                     let data = { nombre: formData.name, dificultad: formData.dificultad, duracion: formData.duracion, temporada: formData.temporada, pais: lista[i].value }
                     postActivity(data)
-                // }
+                //  }
             }
             setFormData({ name: "", dificultad: 1, duracion: 0, temporada: "Verano", pais: [] })
             setPaisesSeleccionados([])
             alert('Actividades guardadas exitosamente')
         } else {
-            alert("Debe seleccionar al menos un pais")
+            alert("Hubo un error")
         }
-        console.log(paisesSeleccionados)
     }
 
     function handleChange(e) {
@@ -84,14 +85,14 @@ function FormActivity({ postActivity, country }) {
                 {/* <select multiple className={s.lista} onChange={setPaisesSeleccionados}>
                     {options.map( op => <option key={op.value} value={op.label}>{op.label}</option>)}
                 </select> */}
-                <Select value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} />
+                <Select className={s.listado} value={paisesSeleccionados} options={options} isMulti onChange={setPaisesSeleccionados} />
             </form>
         </>
     )
 }
 
 function validate(data) {
-    const error = {}
+    const error = {name: "", duracion: ""}
     if (!data.name) error.name = "Debe ingresar el nombre de la actividad"
     if (!data.duracion || data.duracion === 0) error.duracion = "Debe ingresar la duracion"
     return error;

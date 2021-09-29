@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
+nav .buscador {
+    width: 220px;
+}
+
 nav {
     position: fixed;
     z-index: 10;
