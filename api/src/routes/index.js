@@ -7,7 +7,7 @@ const axios = require("axios").default;
 
 axios.get("https://restcountries.com/v2/all")
     .then(async response => {
-        await Pais.sync({ force: true })
+        await Pais.sync({ force: false })
         response.data.map(async pais => {
             if(pais.flags && pais.capital){
                 await Pais.create({
