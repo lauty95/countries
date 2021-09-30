@@ -6,18 +6,17 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
 import s from './nav.module.css'
 import Botones from './../botones'
+import axios from 'axios';
 function Nav(props) {
 
     const [continents, setContinents] = React.useState([])
     const [activities, setActivities] = React.useState([])
 
     useEffect(() => {
-        fetch('http://192.168.0.150:3001/api/continents')
-            .then(res => res.json())
-            .then(data => setContinents(data))
-        fetch('http://192.168.0.150:3001/api/activity')
-            .then(res => res.json())
-            .then(data => setActivities(data))
+        axios.get('/api/continents')
+            .then(data => setContinents(data.data))
+            axios.get('/api/activity')
+            .then(data => setActivities(data.data))
 
     }, []);
 
@@ -89,7 +88,7 @@ function Nav(props) {
                 </select> </li>
                 <li><select name="FilterByContinent" className={estilo.orden} onChange={filterContinent}>
                     <option value="">Continentes</option>
-                    {continents.map(c => <option key={c}>{c}</option>)}
+                    { continents ? continents.map(c => <option key={c}>{c}</option>) : <h1>Hubo un problema con la Ap"</h1>}
                 </select></li>
                 <li><select name="FilterByActivity" className={estilo.orden} onChange={filterActivity}>
                     <option value="">Actividades</option>

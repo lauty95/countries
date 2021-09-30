@@ -4,10 +4,9 @@ import { FILTER_BY_POPULATION, FILTER_BY_ALPH, FILTER_BY_CONTINENT, FILTER_BY_SE
 export function postActivity(data) {
     return function (dispatch) {
         dispatch(getPost());
-        fetch(`http://192.168.0.150:3001/api/countries/name/${data.pais}`)
-            .then(r => r.json())
-            .then(r => data["idPais"] = r[0].id)
-            .then(() => axios.post('http://192.168.0.150:3001/api/activity/', data))
+        axios.get(`/api/countries/name/${data.pais}`)
+            .then(r => data["idPais"] = r.data[0].id)
+            .then(() => axios.post('/api/activity/', data))
     }
 };
 
@@ -25,26 +24,10 @@ export function findCountry(data) {
 export function fetchCountry() {
     return function (dispatch) {
         dispatch(getPost());
-        fetch(`http://192.168.0.150:3001/api/countries`)
-            .then(res => res.json())
-            .then(data => dispatch(findCountry(data)))
+        axios.get(`/api/countries`)
+            .then(data => dispatch(findCountry(data.data)))
     }
 };
-
-// export function orderByPopulation(orden) {
-//     return function (dispatch) {
-//         dispatch(getPost());
-//         fetch(`http://192.168.0.150:3001/api/countriesOrderByPopulation`)
-//             .then(res => res.json())
-//             .then(data => {
-//                 if (orden === 'mayor') {
-//                     dispatch(orderCountry(data.reverse()))
-//                 } else {
-//                     dispatch(orderCountry(data))
-//                 }
-//             })
-//     }
-// }
 
 export function orderCountry(orden) {
     return {

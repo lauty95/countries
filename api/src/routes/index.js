@@ -18,7 +18,8 @@ axios.get("https://restcountries.com/v2/all")
                     capital: pais.capital,
                     subregion: pais.region,
                     area: pais.area,
-                    poblacion: pais.population
+                    poblacion: pais.population,
+                    gini: pais.gini
                 })
             }
         })

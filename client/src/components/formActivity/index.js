@@ -23,7 +23,6 @@ function FormActivity({ postActivity, country }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // let lista = paisesSeleccionados.target;
         let lista = paisesSeleccionados;
         if (!lista) return alert("Seleccione al menos un pais")
         if (lista.length > 0 && error.name === "" && error.duracion === "") {
