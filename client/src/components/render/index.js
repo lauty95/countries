@@ -31,7 +31,7 @@ const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last
             prevPage();
         }
         if (e.targetTouches[0].pageX - 5 < xIni) {
-            nextPage();
+            paginaSiguiente();
         }
     }
 
