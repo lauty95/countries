@@ -54,7 +54,6 @@ export default function CountryDetails({ nombre }) {
       <p>Según nuestros registros, este pais posee una población de <b>{numerar(country.poblacion)}</b> personas.</p>
       <hr></hr>
       {activity.length > 0 ? activity.map((act) => <Actividad key={act.id} props={act} />) : <h2>No hay actividades</h2>}
-
     </div>
   )
 

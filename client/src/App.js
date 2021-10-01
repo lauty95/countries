@@ -5,6 +5,7 @@ import GeneralPages from './components/render'
 import CountryDetails from './components/countryDetail';
 import FormActivity from './components/formActivity';
 import Inicio from './components/inicio';
+import About from './components/about';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         return <CountryDetails nombre = {pais}/>
       }} />
       <Route path="/activity" component={FormActivity} exact />
+      <Route path="/api" component = {About} />
     </div>
   );
 }
