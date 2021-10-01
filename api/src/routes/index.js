@@ -10,7 +10,7 @@ function cargarDB(pais) {
     return {
         id: pais.alpha3Code,
         nombre: pais.name,
-        bandera: pais.flags.svg,
+        bandera: pais.flag,
         continente: pais.region,
         capital: pais.capital,
         subregion: pais.region,
@@ -37,8 +37,10 @@ function cargarDB(pais) {
 //             }
 //         })
 //     });
-
-paises.map(async p => await Pais.create(cargarDB(p)))
+function fillDB () {
+    let response = paises.map(p => cargarDB(p))
+    return Pais.create(response);
+}
 
 router.use("/api", countries);
 router.use("/api", activities);
