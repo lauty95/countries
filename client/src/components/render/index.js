@@ -5,6 +5,7 @@ import * as actionCreators from "../../actions";
 import s from './render.module.css'
 import Cards from '../cards'
 import Botones from "../botones";
+import planeta from "./../../img/tierra.gif"
 
 
 const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last }) => {
@@ -34,7 +35,6 @@ const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last
             paginaSiguiente();
         }
     }
-
     return (
         <div className={s.container} onTouchStart={inicioToque} onTouchMove={cambiarPagina}>
             <div className={s.botonesDireccion}>
@@ -48,7 +48,12 @@ const ApiPages = ({ country, page, nextPage, prevPage, fetchCountry, reset, last
                 </div>
             </div>
             <div className={s.lista}>
-                <Cards paises={country.slice(page, page + 10)} />
+                {
+                    country.length > 0 ?
+                        <Cards paises={country.slice(page, page + 10)} />
+                        :
+                        <img src={planeta} alt="planeta girando" />
+                }
             </div>
         </div>
     )
